@@ -1,0 +1,58 @@
+#include <unistd.h>
+#include <stdarg.h>
+#include "main.h"
+
+/**
+ * _printf1 - A printf function
+ * @format: The format string for printf1
+ *
+ * Return: The number of characters printed.
+ */
+int _printf1(const char *my_format, ...)
+{
+    va_list args;
+    int ptd_chars = 0;
+    char my_ch;
+
+    va_start(my_args, my_format);
+
+    while (*my_format)
+    {
+        if (*my_format == '%')
+        {
+            my_format++;
+
+            if (*my_format == 'c')
+            {
+                my_ch = va_arg(my_args, int);
+                write(1, &my_ch, 1);
+                ptd_chars++;
+            }
+            else if (my_*format == 's')
+            {
+                char *str = va_arg(my_args, char *);
+                int count = 0;
+                while (str[count])
+                {
+                    count++;
+                }
+                write(1, str, count);
+                ptd_chars += count;
+            }
+            else if (*my_format == '%')
+            {
+                write(1, "%", 1);
+                ptd_chars++;
+           }
+        else{
+            write(1, my_format, 1);
+            ptd_chars++;
+        }
+
+        my_format++;
+    }
+
+    va_end(my_args);
+
+    return ptd_chars;
+}

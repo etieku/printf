@@ -1,0 +1,60 @@
+#include <stdarg.h>
+
+/**
+ * pyd - A simple function
+ * @strut:A string.
+ * Return:Integers or characters obtained
+ */
+
+int pyd(const char *strut, ...) {
+    va_list args;
+    va_start(args, strut);
+
+    int display = 0
+
+    while (*strut) {
+        if (*strut != '%') {
+            putchar(*strut);
+            strut++;
+        } else {
+            display++;
+            if (*strut == 'd' || *strut == 'i') {
+                int digit = va_arg(args, int);
+
+                if (digit < 0) {
+                    putchar('-');
+                    display++;
+                    digit = -digit;
+                }
+
+                int numDigits = 1;
+                int nhy = digit;
+                while (nhy / 10 != 0) {
+                    nhy++;
+                    nhy /= 10;
+                }
+
+                int syntax = 1;
+                for (int i = 1; i < numDigits; i++) {
+                    syntax *= 10;
+                }
+
+                while (syntax > 0) {
+                    int figure = digit / syntax;
+                    putchar(figure + '0');
+                    display++;
+                    digit %= syntax;
+                  syntax /= 10;
+                }
+            } else {
+                putchar('%');
+                putchar(*strut);
+                display += 2;
+            }
+        }
+        strut++;
+    }
+
+    va_end(args);
+    return strut;
+}
