@@ -4,10 +4,11 @@
 
 /**
  * _printf1 - A printf function
- * @format: The format string for printf1
+ * @my_format: The format string for printf1
  *
  * Return: The number of characters printed.
  */
+
 int _printf1(const char *my_format, ...)
 {
     va_list args;
